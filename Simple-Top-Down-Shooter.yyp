@@ -35,7 +35,10 @@
   },
   "name":"Simple-Top-Down-Shooter",
   "resources":[
+    {"id":{"name":"obj_egg","path":"objects/obj_egg/obj_egg.yy",},},
     {"id":{"name":"obj_enemy_1","path":"objects/obj_enemy_1/obj_enemy_1.yy",},},
+    {"id":{"name":"obj_enemy_2","path":"objects/obj_enemy_2/obj_enemy_2.yy",},},
+    {"id":{"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",},},
     {"id":{"name":"obj_enemy_piece","path":"objects/obj_enemy_piece/obj_enemy_piece.yy",},},
     {"id":{"name":"obj_enemy_trial","path":"objects/obj_enemy_trial/obj_enemy_trial.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
