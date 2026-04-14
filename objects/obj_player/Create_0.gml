@@ -10,6 +10,11 @@ shoot_timer = shoot_cd;
 shoot_sprite_cd = game_get_speed(gamespeed_fps) * 0.1;
 shoot_sprite_timer = shoot_sprite_cd;
 
+// Invencible Variable
+invencible = false;
+invencible_cd = game_get_speed(gamespeed_fps) * 3;
+invencible_timer = invencible_cd;
+
 // Inputs
 up = false;
 left = false;
@@ -38,6 +43,9 @@ apply_spd = function() {
 move = function() {
 	move_and_collide(hspd, 0, []);
 	move_and_collide(0, vspd, []);
+	
+	x = clamp(x, sprite_width / 2, room_width - sprite_width / 2);
+	y = clamp(y, sprite_height / 2, room_height - sprite_height / 2);
 }
 
 shooting = function() {
@@ -59,6 +67,40 @@ shooting = function() {
 
 			shoot_timer += shoot_cd;
 			sprite_index = spr_player_tiro;
+		}
+	}
+}
+
+take_damage = function() {
+	static _alpha_val = 0.1;
+	
+	if(invencible) {
+		invencible_timer--;
+		
+		if(invencible_timer <= 0) {
+			invencible_timer = invencible_cd;
+			invencible = false;
+			image_alpha = 1;
+		} else {
+			image_alpha -= _alpha_val;
+			
+			if(image_alpha <= 0 or image_alpha >= 1) _alpha_val *= -1;
+		}
+		
+		return;
+	}
+	
+	var _enemy = instance_place(x, y, obj_enemy_parent);
+	
+	if(_enemy) {
+		global.life -= _enemy.damage;
+		invencible = true;
+		_alpha_val = 0.1;
+		
+		if(global.life < 0) {
+			global.life = 3;
+			global.level = 1;
+			game_restart();
 		}
 	}
 }

@@ -6,6 +6,9 @@ piece_min = 15;
 piece_max = 30;
 min_state_timer = 5;
 max_state_timer = 15;
+explosion_damage = true;
+piece_min_vel = 20;
+piece_max_vel = 30;
 
 egg_timer = 0;
 

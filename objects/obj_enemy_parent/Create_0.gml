@@ -3,10 +3,14 @@ vspd = 0;
 max_spd = 2;
 spd = 0;
 life = 1;
+damage = 1;
 shake = 10;
 follow_distance = 200;
 piece_min = 5;
 piece_max = 10;
+piece_min_vel = 8;
+piece_max_vel = 15;
+explosion_damage = false;
 
 
 new_state_timer = 0;
@@ -57,7 +61,9 @@ take_damage = function(_damage = 1) {
 	
 	if(life <= 0) {
 		repeat(irandom_range(piece_min, piece_max)) {
-			instance_create_layer(x, y, "Shoots", obj_enemy_piece);
+			var _piece = instance_create_layer(x, y, "Shoots", obj_enemy_piece);
+			_piece.do_damage = explosion_damage;
+			_piece.spd = random_range(piece_min_vel, piece_max_vel);
 		}
 		
 		instance_create_layer(x, y, "Shoots", obj_enemy_trial).image_angle = image_angle;
